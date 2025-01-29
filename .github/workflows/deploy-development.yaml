@@ -23,7 +23,7 @@ jobs:
 
   deploy-develop-job:
     needs: build-develop-job
-    environment: github-pages
+    environment: development-env
     permissions:
       pages: write
       id-token: write

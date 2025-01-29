@@ -4,13 +4,18 @@ on:
   pull_request:
     branches:
       - develop
+
 jobs:
   lint-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Repo checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Lint HTML and CSS Files
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint HTML and CSS files
         run: |
           npx htmlhint "**/*.html"
           npx stylelint "**/*.css"
@@ -19,6 +24,11 @@ jobs:
     needs: lint-job
     runs-on: ubuntu-latest
     steps:
-      - name: Try build
-        run: |
-          npx parcel build "./src/index.html" --dist-dir "./dev" --public-url "./"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npx parcel build "./src/index.html" --dist-dir "./dev" --public-url "./"

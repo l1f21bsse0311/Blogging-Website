@@ -13,10 +13,10 @@ jobs:
         run: |
           npx parcel build "./src/index.html" --dist-dir "./dev" --public-url "./"
       - name: upload artifact
-        uses: actions/build-pages-artifact@v3 
+        uses: actions/upload-pages-artifact@v3 
         with:
           path: "./dev"
-          name: "build-artifact-develop"
+          name: "upload-artifact-develop"
   deploy-develop-job:
     needs: "build-develop-job"
     environment: "development-env"
